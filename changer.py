@@ -28,6 +28,7 @@ import sys
 import time
 
 import requests
+from dotenv import load_dotenv
 
 API = "https://api.github.com"
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -52,7 +53,8 @@ def read_list(filename):
 
 
 def main():
-    token = os.environ.get("GITHUB_TOKEN")
+    load_dotenv()
+    token = os.getenv("GITHUB_TOKEN")
     if not token:
         sys.exit(
             "Set the GITHUB_TOKEN environment variable first (see top of this file).")
