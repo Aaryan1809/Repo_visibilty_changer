@@ -14,10 +14,8 @@ FILE FORMAT
 
 SETUP (once)
   pip install requests
-  set GITHUB_TOKEN=your_token_here        (Windows CMD)
-  $env:GITHUB_TOKEN="your_token_here"     (PowerShell)
-  export GITHUB_TOKEN=your_token_here     (Linux/Mac)
-
+  create a .env and add the github token in that .env using (GITHUB_TOKEN=...YOUR_TOKEN...)
+    
 RUN
   python change_visibility.py
   It shows a plan first and asks you to type YES before changing anything.
