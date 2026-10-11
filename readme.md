@@ -19,11 +19,6 @@ Instead of opening every repo → Settings → scrolling to the Danger Zone → 
 7. [How to run it](#how-to-run-it)
 8. [Example run](#example-run)
 9. [Things to know before changing visibility](#things-to-know-before-changing-visibility)
-10. [Troubleshooting](#troubleshooting)
-11. [Security tips](#security-tips)
-12. [Limitations](#limitations)
-13. [FAQ](#faq)
-
 ---
 
 ## What this project does
@@ -328,69 +323,3 @@ Changed: 2 | Failed: 0
 - Double-check client work, credentials, and personal data before making anything public.
 
 **Reversibility:** you can switch any repo back at any time, but lost stars and watchers will not return.
-
----
-
-## Troubleshooting
-
-| Problem | What it means / how to fix it |
-|---|---|
-| `ModuleNotFoundError: No module named 'requests'` | Run `pip install requests`. |
-| `ModuleNotFoundError: No module named 'dotenv'` | Run `pip install python-dotenv` (the package name differs from the import name). |
-| `'python' is not recognized...` (Windows) | Python isn't on PATH. Reinstall Python with "Add Python to PATH" ticked, or try `py change_visibility.py`. |
-| `Set the GITHUB_TOKEN environment variable first` | The `.env` file is missing, misnamed (check for `.env.txt`), in the wrong folder, or the line is wrong. It must sit next to `change_visibility.py` and contain `GITHUB_TOKEN=...`. |
-| `Could not log in with that token: Bad credentials` | The token was copied incorrectly, has expired, or was revoked. Generate a new one. |
-| `[skip] name: not found or no access` | Typo in the repo name, the repo isn't owned by your account, or your token doesn't have access to it (fine-grained tokens must include that repo). |
-| `[failed] ... 403` or `404` | The token lacks permission. Classic token: tick `repo`. Fine-grained: set Administration to Read and write. |
-| `[failed] ... 422` | GitHub refused the change, commonly because the repo is a fork of a public repo, or your plan doesn't allow it. |
-| `Both list files are empty` | Add at least one repo name (without a leading `#`) to one of the files. |
-| `These repos are in BOTH files` | Remove the repo from one of the two files. |
-
----
-
-## Security tips
-
-- **Never upload your `.env` file or token to GitHub.** The included `.gitignore` already ignores `.env`, so don't remove that line.
-- If you ever accidentally expose your token, go to GitHub → Settings → Developer settings → Personal access tokens and **delete it immediately**, then create a new one.
-- Use a short expiration date, and delete the token when you're done with it.
-- Only give the token the permissions it needs.
-
----
-
-## Limitations
-
-- It works on repositories **owned by your personal account**. Repos owned by an organization are not handled by this script.
-- It cannot change forks of public repos to private (a GitHub rule).
-- It needs an internet connection and a valid token.
-
----
-
-## FAQ
-
-**Will it change all my repos?**
-No. It only changes the repos whose names you write in the two list files.
-
-**What if I run it twice?**
-Nothing bad happens. Repos already in the requested state are skipped.
-
-**Can I undo a change?**
-Yes. Move the repo name to the other list file and run the script again.
-
-**Can I use it for just one repo?**
-Yes. Put only that one name in a list file.
-
-**Does it delete anything?**
-No. It only changes the visibility setting.
-
-**Do I need to run it as administrator?**
-No. Run it as a normal user in your own project folder.
-
----
-
-## Contributing
-
-Found a bug or have an idea? Open an issue or send a pull request.
-
-## License
-
-Add the license of your choice here (for example MIT).
