@@ -1,26 +1,3 @@
-"""
-Change GitHub repo visibility using two simple text files.
-
-HOW IT WORKS
-  private_list.txt  -> repos listed here will be made PRIVATE
-  public_list.txt   -> repos listed here will be made PUBLIC
-  Only the repos you write in these files are touched. Nothing else.
-
-FILE FORMAT
-  One repo name per line. Lines starting with # and blank lines are ignored.
-  Example:
-      my-portfolio
-      old-college-project
-
-SETUP (once)
-  pip install requests
-  create a .env and add the github token in that .env using (GITHUB_TOKEN=...YOUR_TOKEN...)
-    
-RUN
-  python change_visibility.py
-  It shows a plan first and asks you to type YES before changing anything.
-"""
-
 import os
 import sys
 import time
@@ -42,7 +19,6 @@ def read_list(filename):
             line = line.strip()
             if not line or line.startswith("#"):
                 continue
-            # allow pasting full URLs or owner/repo; keep just the repo name
             name = line.rstrip("/").split("/")[-1]
             if name.endswith(".git"):
                 name = name[:-4]
